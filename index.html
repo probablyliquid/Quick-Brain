@@ -1,0 +1,148 @@
+<!-- Dev Notes: Attribute Freepik for Favicon and put attr in Info/credits page -->
+<!-- Change all images to base 64 after verification IF possible -->
+<!-- Find a cooler name pls -->
+<!-- Add a rank thingy -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple brain game" />
+    <title>Quick Brain</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="shortcut icon"
+      href="resources/images/brain_attrFreepik.png"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Karla:wght@400;500;600;700;800&family=Roboto+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Code+Pro:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css"
+    />
+  </head>
+  <body>
+    <div class="screen" id="screen">
+      <div id="logo-container">
+        <h1 id="logo-text">
+          <span id="txt-quick">Quick</span> <span id="txt-brain">Brain</span>
+        </h1>
+        <img
+          src="resources/images/logo(better)_attrFreepik.png"
+          alt="logo of a brain assembled like a jigsaw puzzle"
+          id="logo-img"
+          draggable="false"
+        />
+      </div>
+      <div id="important-buttons-container">
+        <button class="landing-page-buttons" id="start-btn">Start Game</button>
+        <button class="landing-page-buttons" id="instructions-btn">
+          Instructions
+        </button>
+      </div>
+      <div id="miscellaneous-stuff-container">
+        <p id="high-score">High Score:</p>
+        <button class="landing-page-buttons" id="credits">Credits</button>
+        <!-- [Add a rank feature here] -->
+      </div>
+      <!-- Credits Screen: -->
+      <div class="credits-screen" id="credits-screen">
+        <i class="fi fi-br-arrow-left" id="return-btn-credits"></i>
+        <h1 id="credits-headline">Credits</h1>
+        <p class="credits-text">
+          This is a spin off based on "One Brain" game by Erik Wegener,
+          available on the
+          <a
+            href="https://apps.apple.com/us/app/one-brain/id1229367064"
+            target="_blank"
+            rel="noopener noreferrer"
+            >App Store</a
+          >
+          and
+          <a
+            href="https://play.google.com/store/apps/details?id=com.wegenerlabs.OneBrain&hl=en_IN&gl=US"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Play</a
+          >
+          Store.
+        </p>
+        <p class="credits-text">
+          This was made as a fun project using HTML, CSS, and JS
+        </p>
+        <pre class="credits-text">
+        Attribution: Favicon and Logo from Freepik.
+        Interface icons from &lt;uicons&gt; and Aldo Cervantes
+        </pre>
+        <p class="credits-text">
+          Assets from
+          <a
+            href="https://www.flaticon.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Flaticons</a
+          >
+        </p>
+        <p class="credits-text"></p>
+        <p class="credits-text">
+          Built by
+          <a href="https://priyanshu.fun" id="name">Priyanshu Volvotkar</a>
+        </p>
+        <p class="credits-text">[ liquid.nitrogen ]</p>
+      </div>
+      <!-- Instructions Screen Container -->
+      <div class="instructions-screen" id="instructions-screen">
+        <i class="fi fi-br-arrow-left" id="return-btn-instructions"></i>
+        <h1 id="instructions-heading">Instructions</h1>
+        <p id="instructions-text">How to play?</p>
+        <p id="instructions-text">The game is very simple.</p>
+        <p id="instructions-text">
+          You have 1 second to match the colour to the prompted text.
+        </p>
+        <p id="instructions-text">
+          Your answer can either be a YES (tick) or a NO (cross)
+        </p>
+        <p id="instructions-text">Good Luck!</p>
+      </div>
+      <!-- Gameplay buttons container -->
+      <div class="gameplay-buttons-container" id="gameplay-buttons-container">
+        <div class="incorrect-btn-container" id="incorrect-btn-container">
+          <button class="gameplay-btns" id="incorrect-btn">
+            <img
+              src="resources/images/cross_attrAldoCervantes.png"
+              alt="cross mark"
+              id="incorrect-img"
+              draggable="false"
+            />
+          </button>
+        </div>
+        <div class="correct-btn-container" id="correct-btn-container">
+          <button class="gameplay-btns" id="correct-btn">
+            <img
+              src="resources/images/tick_attrAldoCervantes.png"
+              alt="tick mark"
+              id="correct-img"
+              draggable="false"
+            />
+          </button>
+        </div>
+      </div>
+      <!-- Gameplay text + Countdown -->
+      <div class="gameplay-text" id="gameplay-text">
+        <h1 id="gameplay-text-heading">White</h1>
+      </div>
+      <div class="gameplay-countdown" id="gameplay-countdown">
+        <h2 class="gameplay-elements" id="gameplay-score">0</h2>
+        <h2 class="gameplay-elements" id="gameplay-countdown-text">Begin</h2>
+      </div>
+    </div>
+    <script src="game engine.js"></script>
+  </body>
+</html>
