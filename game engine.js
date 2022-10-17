@@ -1,4 +1,7 @@
-// window.addEventListener("load", function () {
+/* Developer Notes: 
+- fix game-engine code
+ */
+
 const screenEl = document.getElementById("screen");
 const startBtn = document.getElementById("start-btn");
 const instructionsBtn = document.getElementById("instructions-btn");
@@ -177,4 +180,3 @@ function gameEngine() {
     }
   });
 }
-// });
