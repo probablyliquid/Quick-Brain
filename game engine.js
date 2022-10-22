@@ -1,5 +1,5 @@
 /* Developer Notes: 
-- fix game-engine code
+ - make it look cooler
  */
 
 const screenEl = document.getElementById("screen");
@@ -17,14 +17,20 @@ const instructionsScreen = document.getElementById("instructions-screen");
 const gameplayBtns = document.getElementById("gameplay-buttons-container");
 const gameplayTxt = document.getElementById("gameplay-text");
 const gameplayCountdown = document.getElementById("gameplay-countdown");
+const timerText = document.getElementById("gameplay-countdown-text");
 const gameplayHeading = document.getElementById("gameplay-text-heading");
 const incorrect = document.getElementById("incorrect-img");
 const correct = document.getElementById("correct-img");
 const scoreEl = document.getElementById("gameplay-score"); // check
-let firstPlay = true;
+
 let score = 0; // 0 -> default | >0 -> game in progress
-let isAlive = -1; // -1 -> first start | 0 -> game over | 1 -> start/game-in-progress
-let tries = 0;
+
+/* Game Conditional Variables */
+let gameOver = false;
+let firstPlay = true;
+let isAlive = false;
+/* -------------------------- */
+
 let randomColor = "";
 let randomText = "";
 const scoreCounter = document.getElementById("score-counter");
@@ -62,7 +68,7 @@ returnToHomeFromInstructions.addEventListener("click", returnHome);
 
 // Start game function:
 function startGame() {
-  isAlive = true;
+  firstPlay = true; // First play
   score = 0;
   HideEl();
   gameplayBtns.style.visibility = "visible";
@@ -133,16 +139,13 @@ let GameComponents = {
 // Game Engine:
 function gameEngine() {
   scoreCounter.style.visibility = "hidden";
-  firstPlay = false;
   const gameComps = GameComponents;
   randomColor = gameComps.colors[Math.floor(Math.random() * 6)];
   randomText = gameComps.text[Math.floor(Math.random() * 6)];
   screenEl.style.backgroundColor = randomColor;
   gameplayHeading.textContent = randomText;
   randomText = randomText.toLowerCase();
-  console.log("screen color: " + randomColor + "\nText color: " + randomText);
-  console.log("number of times a button has been clicked: " + tries);
-  tries++;
+  timer();
   listener();
 }
 
@@ -154,10 +157,12 @@ function listener() {
 }
 
 function correctListener() {
-  console.log("correct btn clicked");
+  // console.log("correct btn clicked");
+  firstPlay = false; // Game has begun
   if (randomColor === randomText) {
     score++;
     scoreEl.textContent = score;
+    buttonClicked();
     gameEngine();
   } else {
     scoreEl.textContent = score;
@@ -169,10 +174,12 @@ function correctListener() {
 }
 
 function incorrectListener() {
-  console.log("incorrect btn clicked");
+  // console.log("incorrect btn clicked");
+  firstPlay = false; // Game has begun
   if (randomColor !== randomText) {
     score++;
     scoreEl.textContent = score;
+    buttonClicked();
     gameEngine();
   } else {
     scoreEl.textContent = score;
@@ -187,6 +194,29 @@ function retry_quest() {
   retryBtn.addEventListener("click", function () {
     score = 0;
     scoreEl.textContent = score;
+    firstPlay = true;
     gameEngine();
   });
+}
+
+/* Timer */
+
+function buttonClicked() {
+  firstPlay = false;
+  setInterval(timer, 3000);
+}
+
+const time = 3;
+let myTime = 1;
+function timer() {
+  if (firstPlay === true) {
+    timerText.textContent = "Begin";
+  } else {
+    setInterval(updateTimer, 1000);
+  }
+}
+
+function updateTimer() {
+  timerText.textContent = myTime;
+  myTime--;
 }
