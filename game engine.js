@@ -24,6 +24,7 @@ const scoreEl = document.getElementById("gameplay-score"); // check
 let firstPlay = true;
 let score = 0; // 0 -> default | >0 -> game in progress
 let isAlive = -1; // -1 -> first start | 0 -> game over | 1 -> start/game-in-progress
+let tries = 0;
 
 // Show landing page when first run
 logoContainer.style.visibility = "visible";
@@ -115,68 +116,38 @@ function ShowEl() {
 
 // Game components object:
 let GameComponents = {
-  colors: [
-    "black",
-    "white",
-    "pink",
-    "orange",
-    "green",
-    "skyblue", // this is to be checked as "blue"
-    "red",
-  ],
-  text: ["Black", "White", "Pink", "Orange", "Green", "SkyBlue", "Red"],
+  colors: ["black", "pink", "orange", "green", "blue", "red"],
+  text: ["Black", "Pink", "Orange", "Green", "Blue", "Red"],
 };
 
 // Game Engine:
 function gameEngine() {
   firstPlay = false;
   const gameComps = GameComponents;
-  let randomColor = gameComps.colors[Math.floor(Math.random() * 7)];
-  let randomText = gameComps.text[Math.floor(Math.random() * 7)];
+  let randomColor = gameComps.colors[Math.floor(Math.random() * 6)];
+  let randomText = gameComps.text[Math.floor(Math.random() * 6)];
   screenEl.style.backgroundColor = randomColor;
   gameplayHeading.textContent = randomText;
   randomText = randomText.toLowerCase();
   console.log("screen color: " + randomColor + "\nText color: " + randomText);
+  console.log("number of times a button has been clicked: " + tries);
+  tries++;
+  listener();
+}
 
-  // correct img clicked:
-  correct.addEventListener("click", function () {
-    console.log("correct btn clicked");
-    randomColor = randomColor;
-    randomText = randomText;
-    if (String(randomColor) === String(randomText)) {
-      console.log("colour " + randomColor + " matches text " + randomText);
-      score += 1;
-      scoreEl.textContent = score;
-      gameEngine();
-    } else {
-      console.log(
-        "colour " + randomColor + " does not match text " + randomText
-      );
-      scoreEl.textContent = score;
-      score = 0;
-      isAlive = false;
-      startGame();
-    }
+function listener() {
+  gameplayBtns.addEventListener("mouseover", function () {
+    correct.addEventListener("click", correctListener);
+    incorrect.addEventListener("click", incorrectListener);
   });
+}
 
-  // incorrect img clicked:
-  incorrect.addEventListener("click", function () {
-    console.log("incorrect btn clicked");
-    randomColor = randomColor;
-    randomText = randomText;
-    if (String(randomColor) != String(randomText)) {
-      console.log(
-        "colour " + randomColor + " does not match text " + randomText
-      );
-      score += 1;
-      scoreEl.textContent = score;
-      gameEngine();
-    } else {
-      console.log("colour " + randomColor + " matches text " + randomText);
-      scoreEl.textContent = score;
-      score = 0;
-      isAlive = false;
-      startGame();
-    }
-  });
+function correctListener() {
+  console.log("correct btn clicked");
+  gameEngine();
+}
+
+function incorrectListener() {
+  console.log("incorrect btn clicked");
+  gameEngine();
 }
