@@ -142,6 +142,30 @@
         <h2 class="gameplay-elements" id="gameplay-score">0</h2>
         <h2 class="gameplay-elements" id="gameplay-countdown-text">Begin</h2>
       </div>
+      <!-- Score counter  -->
+      <div class="score-counter" id="score-counter">
+        <h3 id="gameover">Game Over</h3>
+        <p id="your-score">Your Score: <span id="current-score">null</span></p>
+        <p id="your-high-score">
+          High Score: <span id="current-high-score">null</span>
+        </p>
+        <button id="clicktoretry">
+          <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+          <lord-icon
+            src="https://cdn.lordicon.com/nxooksci.json"
+            trigger="hover"
+            colors="primary:whitesmoke"
+            style="
+              width: 50px;
+              height: 50px;
+              background-color: #1d1e2c;
+              margin: 0px;
+              padding: 0px;
+            "
+          >
+          </lord-icon>
+        </button>
+      </div>
     </div>
     <script src="game engine.js"></script>
   </body>

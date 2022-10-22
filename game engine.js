@@ -25,6 +25,12 @@ let firstPlay = true;
 let score = 0; // 0 -> default | >0 -> game in progress
 let isAlive = -1; // -1 -> first start | 0 -> game over | 1 -> start/game-in-progress
 let tries = 0;
+let randomColor = "";
+let randomText = "";
+const scoreCounter = document.getElementById("score-counter");
+const retryBtn = document.getElementById("clicktoretry");
+const scoreCounterCurrentScore = document.getElementById("current-score");
+const scoreCounterHighScore = document.getElementById("current-high-score");
 
 // Show landing page when first run
 logoContainer.style.visibility = "visible";
@@ -37,6 +43,7 @@ instructionsScreen.style.visibility = "hidden";
 gameplayBtns.style.visibility = "hidden";
 gameplayTxt.style.visibility = "hidden";
 gameplayCountdown.style.visibility = "hidden";
+scoreCounter.style.visibility = "hidden";
 
 // Start Button Clicked:
 startBtn.addEventListener("click", startGame);
@@ -84,6 +91,7 @@ function returnHome() {
   gameplayBtns.style.visibility = "hidden";
   gameplayTxt.style.visibility = "hidden";
   gameplayCountdown.style.visibility = "hidden";
+  scoreCounter.style.visibility = "hidden";
 }
 
 // Hide all elements function:
@@ -98,6 +106,7 @@ function HideEl() {
   gameplayBtns.style.visibility = "hidden";
   gameplayTxt.style.visibility = "hidden";
   gameplayCountdown.style.visibility = "hidden";
+  scoreCounter.style.visibility = "hidden";
 }
 
 // Show all elements function:
@@ -112,6 +121,7 @@ function ShowEl() {
   gameplayBtns.style.visibility = "visible";
   gameplayTxt.style.visibility = "visible";
   gameplayCountdown.style.visibility = "visible";
+  scoreCounter.style.visibility = "visible";
 }
 
 // Game components object:
@@ -122,10 +132,11 @@ let GameComponents = {
 
 // Game Engine:
 function gameEngine() {
+  scoreCounter.style.visibility = "hidden";
   firstPlay = false;
   const gameComps = GameComponents;
-  let randomColor = gameComps.colors[Math.floor(Math.random() * 6)];
-  let randomText = gameComps.text[Math.floor(Math.random() * 6)];
+  randomColor = gameComps.colors[Math.floor(Math.random() * 6)];
+  randomText = gameComps.text[Math.floor(Math.random() * 6)];
   screenEl.style.backgroundColor = randomColor;
   gameplayHeading.textContent = randomText;
   randomText = randomText.toLowerCase();
@@ -144,10 +155,38 @@ function listener() {
 
 function correctListener() {
   console.log("correct btn clicked");
-  gameEngine();
+  if (randomColor === randomText) {
+    score++;
+    scoreEl.textContent = score;
+    gameEngine();
+  } else {
+    scoreEl.textContent = score;
+    scoreCounterCurrentScore.textContent = score;
+    score = 0;
+    scoreCounter.style.visibility = "visible";
+    retry_quest();
+  }
 }
 
 function incorrectListener() {
   console.log("incorrect btn clicked");
-  gameEngine();
+  if (randomColor !== randomText) {
+    score++;
+    scoreEl.textContent = score;
+    gameEngine();
+  } else {
+    scoreEl.textContent = score;
+    scoreCounterCurrentScore.textContent = score;
+    score = 0;
+    scoreCounter.style.visibility = "visible";
+    retry_quest();
+  }
+}
+
+function retry_quest() {
+  retryBtn.addEventListener("click", function () {
+    score = 0;
+    scoreEl.textContent = score;
+    gameEngine();
+  });
 }
